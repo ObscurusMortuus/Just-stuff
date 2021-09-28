@@ -1,0 +1,35 @@
+def Caesar_cipher(text):
+    eng_alph = 'abcdefghijklmnopqrstuvwxyz'
+    rus_alph = 'абвгдежзийклмнопрстуфхцчшщъыьэюя'
+    text_ciph = ''
+    lang = ''
+    s = 0
+    if text[0].lower() in eng_alph:
+        lang = eng_alph
+    if text[0].lower() in rus_alph:
+        lang = rus_alph
+    text_split = text.split()
+    for i in range(len(text_split)):
+        for j in range(len(text_split[i])):
+            if text_split[i][j].isalpha() is True:
+                s += 1
+        for j in range(len(text_split[i])):
+            shit = lang.find(text_split[i][j].lower())
+            if text_split[i][j].isalpha() is True:
+                if text_split[i][j].isupper() is True:
+                    if shit + s >= len(lang):
+                        text_ciph += lang[shit + s - len(lang)].upper()
+                    if shit + s < len(lang):
+                        text_ciph += lang[shit + s].upper()
+                if text_split[i][j].isupper() is False:
+                    if shit + s >= len(lang):
+                        text_ciph += lang[shit + s - len(lang)]
+                    if shit + s < len(lang):
+                        text_ciph += lang[shit + s]
+            else:
+                text_ciph += text_split[i][j]
+        text_ciph += ' '
+        s = 0
+    return print(text_ciph.rstrip())
+
+Caesar_cipher(input())
